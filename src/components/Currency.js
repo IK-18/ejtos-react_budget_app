@@ -1,17 +1,23 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const Currency = () => {
+    const { dispatch } = useContext(AppContext);
+    const handleCurrencyChange = (event) => {
+        dispatch(({
+            type: 'CHG_CURRENCY',
+            payload: event.target.value
+        }))
+    }
     return (
-        <div className='alert alert-secondary'>
-            <span>Currency(
-                <select id="currency">
-                    <option value="$">$ Dollar</option>
-                    <option value="£">£ Pound</option>
-                    <option value="€">€ Euro</option>
-                    <option value="₹">₹ Ruppee</option>
-                </select>
-            )</span>
+        <div className='alert bg-success'>
+            <label className="text-white" for="currency">Currency </label>
+            <select onChange={handleCurrencyChange} className="bg-transparent border-0 text-white" id="currency">
+                <option className="bg-success" value="$">($ Dollar)</option>
+                <option className="bg-success" selected value="£">(£ Pound)</option>
+                <option className="bg-success" value="€">(€ Euro)</option>
+                <option className="bg-success" value="₹">(₹ Ruppee)</option>
+            </select>
         </div>
     )
 }
